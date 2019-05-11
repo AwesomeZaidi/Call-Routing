@@ -42,12 +42,16 @@ def find_route_cost(number_data, phone_number):
 		p = len of phone_number
 		n = len of number_data list
 	"""
-	for index, _ in enumerate(number_data[::2]):
+	print('original number:', phone_number)
+	for index, element in enumerate(number_data[::2]):
+		print('index:', index)
+		print('element:', element)
 		if phone_number in number_data:
 			real_index = number_data.index(phone_number)
 			return str(number_data[real_index + 1])
 		else:
-			phone_number = phone_number[:index-1]
+			phone_number = phone_number[:len(phone_number)-1]
+			print('Not Found. new phone number:', phone_number)
 	
 	return str(0) # if number not found
 
@@ -57,8 +61,8 @@ def write_cost(phone_number, cost):
 
 if __name__ == "__main__":
 	#  scenario playing like how Edwin had it.
-	paths = read_file("phone-numbers-1.txt")  # phone-numbers
-	phone_number = '+14152348'
+	paths = read_file("phone-numbers-4.txt")  # phone-numbers
+	phone_number = '+141523481111'
 	number_route_cost = find_route_cost(paths, phone_number)
 	write_cost(phone_number, number_route_cost)
 
