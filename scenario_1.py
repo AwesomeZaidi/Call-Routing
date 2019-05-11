@@ -42,17 +42,12 @@ def find_route_cost(number_data, phone_number):
 		p = len of phone_number
 		n = len of number_data list
 	"""
-	print('original number:', phone_number)
-	for index, element in enumerate(number_data[::2]):
-		print('index:', index)
-		print('element:', element)
+	for _ in number_data[::2]:
 		if phone_number in number_data:
 			real_index = number_data.index(phone_number)
 			return number_data[real_index + 1]
 		else:
-			phone_number = phone_number[:len(phone_number)-1]
-			print('Not Found. new phone number:', phone_number)
-	
+			phone_number = phone_number[:len(phone_number)-1]	
 	return 0 # if number not found
 
 if __name__ == "__main__":
