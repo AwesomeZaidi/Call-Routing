@@ -30,7 +30,7 @@ def read_file(file_name):
 		Opens the file and splits the numbers into a list.
 	"""
 	file = open(file_name, "r")
-	number_data = file.readline()
+	number_data = file.read()
 	file.close()
 	number_data = re.split(',|\n', number_data)
 	return number_data
