@@ -29,9 +29,10 @@ def read_file(file_name):
 	"""
 		Opens the file and splits the numbers into a list.
 	"""
-	with open('data/' + file_name, "r") as file:
-		number_data = file.read()
-		number_data = re.split(',|\n', number_data)
+	file = open(file_name, "r")
+	number_data = file.read()
+	file.close()
+	number_data = re.split(',|\n', number_data)
 	return number_data
 
 def find_route_cost(number_data, phone_number):
