@@ -45,13 +45,21 @@ def find_route_cost(number_data, phone_number):
 	for _ in number_data[::2]:
 		if phone_number in number_data:
 			real_index = number_data.index(phone_number)
-			return number_data[real_index + 1]
+			return str(number_data[real_index + 1])
 		else:
-			phone_number = phone_number[:len(phone_number)-1]	
-	return 0 # if number not found
+			phone_number = phone_number[:len(phone_number)-1]
+
+	return str(0) # if number not found
+
+def write_cost(phone_number, cost):
+	f = open("route-costs-1.txt", "w")
+	f.write(phone_number + ", " + number_route_cost)
 
 if __name__ == "__main__":
 	#  scenario playing like how Edwin had it.
-	paths = read_file("route-costs-4.txt")
-	number_route_cost = find_route_cost(paths, '+14152348111')
-	print(number_route_cost)
+	paths = read_file("phone-numbers-4.txt")  # phone-numbers
+	phone_number = '+141523481111'
+	number_route_cost = find_route_cost(paths, phone_number)
+	write_cost(phone_number, number_route_cost)
+
+
