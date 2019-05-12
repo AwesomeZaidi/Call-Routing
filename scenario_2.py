@@ -25,22 +25,23 @@ class CallRouter(object):
     # go through our phone_numbers list and run each one in find_lowest_price_for_number
     # write each number and its cost into a text file.
 
-    def __init__(self, phone_numbers_path, carrier_route_path):
-        self.phone_numbers = self.parse_phone_numbers(phone_numbers_path)
-        self.parse_carrier_routes(carrier_route_path)
+    def __init__(self, carrier_route_path):
+        # self.phone_numbers = self.parse_phone_numbers(phone_numbers_path)
+        # self.parse_carrier_routes(carrier_route_path)
+        self.route_costs = self._convert_file_into_hashtable(carrier_route_path)
 
-    def convert_file_into_array(self, path_to_file):
-        """Turns txt file into list without '\n'"""
-        with open('data/' + path_to_file, "r") as file:
-            data = file.read()
-            data = re.split(',|\n', data)
-        return data
+    # def convert_file_into_array(self, path_to_file):
+    #     """Turns txt file into list without '\n'"""
+    #     with open('data/' + path_to_file, "r") as file:
+    #         data = file.read()
+    #         data = re.split(',|\n', data)
+    #     return data
 
-    def parse_phone_numbers(self, phone_numbers_path):
-        """Turns txt file into list of phone numbers without the +"""
-        return self.convert_file_into_array(phone_numbers_path)
+    # def parse_phone_numbers(self, phone_numbers_path):
+    #     """Turns txt file into list of phone numbers without the +"""
+    #     return self.convert_file_into_array(phone_numbers_path)
 
-    def convert_file_into_hashtable(self, path_to_file):
+    def _convert_file_into_hashtable(self, path_to_file):
         """Turns txt into hash set"""
         hash_lookup = HashTable()
         with open('data/' + path_to_file, "r") as file:
@@ -49,19 +50,25 @@ class CallRouter(object):
             line = line[:-1]
             # slice through comma space
             carrier, cost = line.split(",")
-            hash_lookup.set(carrier, cost)
+
+            if hash_lookup.contains(carrier):
+                original_cost = hash_lookup.get(carrier)
+                if cost < original_cost:
+                    hash_lookup.set(carrier, cost)
+            else:
+                hash_lookup.set(carrier, cost)
         return hash_lookup
 
-    def parse_carrier_routes(self, carrier_routes_path):
-        """Turns txt file into a hash set with routes and costs"""
-        return self.convert_file_into_array(carrier_routes_path)
+    # def parse_carrier_routes(self, carrier_routes_path):
+    #     """Turns txt file into a hash set with routes and costs"""
+    #     return self.convert_file_into_array(carrier_routes_path)
 
 
 def test_call_router():
-    phone_numbers_path = 'data/phone-numbers-1000.txt'
-    carrier_route_path = 'data/route-costs-100.txt'
-    call_router = CallRouter(phone_numbers_path, carrier_route_path)
-    return call_router
+    # phone_numbers_path = 'data/phone-numbers-1000.txt'
+    carrier_route_path = 'carrier-routes-4.txt'
+    call_router = CallRouter(carrier_route_path)
+    return call_router.route_costs.values()
 
 if __name__ == '__main__':
     print(test_call_router())
