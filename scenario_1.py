@@ -57,9 +57,7 @@ def write_cost(phone_number, cost):
 
 if __name__ == "__main__":
 	#  scenario playing like how Edwin had it.
-	paths = read_file("phone-numbers-3.txt")  # phone-numbers
-	phone_number = '+141523481111'
+	paths = read_file("carrier-routes-4.txt")  # phone-numbers
+	phone_number = '+14152348'
 	number_route_cost = find_route_cost(paths, phone_number)
 	write_cost(phone_number, number_route_cost)
-
-
