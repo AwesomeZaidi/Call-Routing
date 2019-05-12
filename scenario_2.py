@@ -31,3 +31,24 @@ class CallRouter(object):
     def parse_phone_numbers(self, phone_numbers_path):
         """Turns txt file into list of phone numbers without the +"""
         return self.turn_txt_file_into_array(phone_numbers_path)
+
+
+# def read_file(file_name): <- our data structure to look up
+# 	"""
+# 		Opens the file and splits the numbers into a list.
+# 	"""
+# 	with open('data/' + file_name, "r") as file:
+# 		number_data = file.read()
+# 		number_data = re.split(',|\n', number_data)
+# 	return number_data
+
+
+# def find_route_cost(number_data, phone_number):
+	# for _ in phone_number:
+	# 	if phone_number in number_data:
+	# 		real_index = number_data.index(phone_number)
+	# 		return str(number_data[real_index + 1])
+	# 	else:
+	# 		phone_number = phone_number[:len(phone_number)-1]
+
+	# return str(0)  # if number not found
