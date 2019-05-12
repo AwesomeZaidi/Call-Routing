@@ -13,7 +13,7 @@
 import random # generate random numbers
 import re # regular expressions
 import sys # command line args
-from set import HashSet 
+from hashtable import HashTable 
 
 class CallRouter(object):
 
@@ -40,13 +40,17 @@ class CallRouter(object):
         """Turns txt file into list of phone numbers without the +"""
         return self.convert_file_into_array(phone_numbers_path)
 
-    def convert_file_into_hashset(self, path_to_file):
+    def convert_file_into_hashtable(self, path_to_file):
         """Turns txt into hash set"""
+        hash_lookup = HashTable()
         with open('data/' + path_to_file, "r") as file:
-            data = file.readline()
-
-            # data = re.split(',|\n', data)
-        return data
+           for line in file:
+            #    remove end of string
+            line = line[:-1]
+            # slice through comma space
+            carrier, cost = line.split(",")
+            hash_lookup.set(carrier, cost)
+        return hash_lookup
 
     def parse_carrier_routes(self, carrier_routes_path):
         """Turns txt file into a hash set with routes and costs"""
