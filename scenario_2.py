@@ -26,18 +26,18 @@ class CallRouter(object):
     # write each number and its cost into a text file.
 
     def __init__(self, carrier_route_path):
-        self.route_costs = self._convert_file_into_hashtable(carrier_route_path)
+        """
+            route_costs: hash table: routes : costs
+        """
+        self.route_costs = self.__convert_file_into_hashtable(carrier_route_path)
 
-    def _convert_file_into_hashtable(self, path_to_file):
+    def __convert_file_into_hashtable(self, path_to_file):
         """Turns txt into hash set"""
         hash_lookup = HashTable()
         with open('data/' + path_to_file, "r") as file:
            for line in file:
-            #    remove end of string
-            line = line[:-1]
-            # slice through comma space
             carrier, cost = line.split(",")
-
+            print('hash_lookup cost:', cost)
             if hash_lookup.contains(carrier):
                 original_cost = hash_lookup.get(carrier)
                 if cost < original_cost:
@@ -46,11 +46,32 @@ class CallRouter(object):
                 hash_lookup.set(carrier, cost)
         return hash_lookup
 
+    def read_number(self, path_to_file):
+        with open('data/' + path_to_file, "r") as file:
+           for line in file:
+               self.find_route_cost(line)
+
+    def find_route_cost(self, phone_number):
+        for _ in phone_number:
+            if self.route_costs.contains(phone_number):
+                cost = self.route_costs.get(phone_number)
+                print("Cost:", cost)
+                self.__write_cost(phone_number, cost)
+                return
+            else:
+                phone_number = phone_number[:len(phone_number)-1]
+
+    def __write_cost(self, phone_number, cost):
+        with open("route-costs-2.txt", "a") as f:
+            f.write(phone_number + ", " + cost)
+
 def test_call_router():
     # phone_numbers_path = 'data/phone-numbers-1000.txt'
     carrier_route_path = 'carrier-routes-4.txt'
     call_router = CallRouter(carrier_route_path)
+    call_router.read_number('phone-numbers-1000.txt')
     return call_router.route_costs.values()
+    # return
 
 if __name__ == '__main__':
     print(test_call_router())
