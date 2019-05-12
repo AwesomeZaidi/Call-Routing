@@ -79,7 +79,6 @@ def test_call_router():
     call_router = CallRouter(carrier_route_path)
     call_router.read_number('phone-numbers-3.txt')
     return call_router.route_costs.values()
-    # return
 
 if __name__ == '__main__':
     print(test_call_router())
