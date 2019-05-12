@@ -16,21 +16,19 @@ import sys # command line args
 from hashtable import HashTable 
 
 class CallRouter(object):
-
-    # function to convert phone_numbers file into a list of numbers
-    # function to convert route_costs into a hash set with lowest costs for routes
-
-    # function to find the lowest cost of a number in the route_costs hash set
     
-    # go through our phone_numbers list and run each one in find_lowest_price_for_number
-    # write each number and its cost into a text file.
-
+    # ------------------------------------------------------------------------------
+    # CallRoutes - Constructor
+    # ------------------------------------------------------------------------------
     def __init__(self, carrier_route_path):
         """
             route_costs: hash table: routes : costs
         """
         self.route_costs = self.__convert_file_into_hashtable(carrier_route_path)
-
+    
+    # ------------------------------------------------------------------------------
+    # CallRouter - Intended Private Methods
+    # ------------------------------------------------------------------------------
     def __convert_file_into_hashtable(self, path_to_file):
         """Turns txt into hash set"""
         hash_lookup = HashTable()
@@ -55,6 +53,9 @@ class CallRouter(object):
                cost = self.find_route_cost(line)
                self.write_cost(line, cost)
 
+    # ------------------------------------------------------------------------------
+    # CallRouter - Public Methods
+    # ------------------------------------------------------------------------------
     def find_route_cost(self, phone_number):
         print("phone:", phone_number)
         for _ in phone_number:
