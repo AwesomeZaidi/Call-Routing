@@ -26,20 +26,7 @@ class CallRouter(object):
     # write each number and its cost into a text file.
 
     def __init__(self, carrier_route_path):
-        # self.phone_numbers = self.parse_phone_numbers(phone_numbers_path)
-        # self.parse_carrier_routes(carrier_route_path)
         self.route_costs = self._convert_file_into_hashtable(carrier_route_path)
-
-    # def convert_file_into_array(self, path_to_file):
-    #     """Turns txt file into list without '\n'"""
-    #     with open('data/' + path_to_file, "r") as file:
-    #         data = file.read()
-    #         data = re.split(',|\n', data)
-    #     return data
-
-    # def parse_phone_numbers(self, phone_numbers_path):
-    #     """Turns txt file into list of phone numbers without the +"""
-    #     return self.convert_file_into_array(phone_numbers_path)
 
     def _convert_file_into_hashtable(self, path_to_file):
         """Turns txt into hash set"""
@@ -58,11 +45,6 @@ class CallRouter(object):
             else:
                 hash_lookup.set(carrier, cost)
         return hash_lookup
-
-    # def parse_carrier_routes(self, carrier_routes_path):
-    #     """Turns txt file into a hash set with routes and costs"""
-    #     return self.convert_file_into_array(carrier_routes_path)
-
 
 def test_call_router():
     # phone_numbers_path = 'data/phone-numbers-1000.txt'
