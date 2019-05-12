@@ -42,7 +42,7 @@ def find_route_cost(number_data, phone_number):
 		p = len of phone_number
 		n = len of number_data list
 	"""
-	for _ in number_data[::2]:
+	for _ in phone_number:
 		if phone_number in number_data:
 			real_index = number_data.index(phone_number)
 			return str(number_data[real_index + 1])
@@ -58,6 +58,6 @@ def write_cost(phone_number, cost):
 if __name__ == "__main__":
 	#  scenario playing like how Edwin had it.
 	paths = read_file("carrier-routes-4.txt")  # phone-numbers
-	phone_number = '+14152348'
+	phone_number = '+14152348111'
 	number_route_cost = find_route_cost(paths, phone_number)
 	write_cost(phone_number, number_route_cost)
