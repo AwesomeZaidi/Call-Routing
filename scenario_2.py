@@ -71,7 +71,7 @@ class CallRouter(object):
         
 
     def write_cost(self, phone_number, cost):
-        with open("route-costs-2.txt", "a") as f:
+        with open("call-costs-2.tx", "a") as f:
             f.write(phone_number + ", " + cost + "\n")
 
 def test_call_router():

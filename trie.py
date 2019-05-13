@@ -10,7 +10,6 @@ class Trie:
         """Initialize this trie tree and insert the given items."""
         self.root = TrieNode()
         
-
     def get_node(self):
         return TrieNode()
     
@@ -54,26 +53,3 @@ class Trie:
         else: 
             return cost
 
-
-
-
-
-
-    # def search(self, phone_number: str) -> str:
-        # """Searches for a phone number in trie and returns cost"""
-        # print('in trie search')
-        # node = self.root
-        # print('node:', node)
-        # cost = 0
-
-        # for number in phone_number:
-        #     print('number')
-        #     number = int(number)
-        #     if node.children[number] is not None:
-        #         node = node.children[number]
-        #         if node.cost is not None:
-        #             cost = node.cost
-
-        # # return the cost at node if there is one
-        # # if not, return the higher cost stored in the tree
-        # return node.cost if node.cost is not None else cost

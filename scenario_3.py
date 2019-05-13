@@ -12,7 +12,10 @@
 
 import re
 import os
-import glob
+import resource
+import platform
+import time
+import mmap
 from trie import Trie
 class CallRouter(object):
   
@@ -32,8 +35,7 @@ class CallRouter(object):
       # print('in build_tree')
       trie = Trie()
       # iterates through routes and costs
-      with open(file_path, 'r', buffering=2000000) as f:
-        # lines = (l.split(',') for l in f.readlines())
+      with open('data/' + file_path, 'r', buffering=2000000000) as f:
         for line in f:
           line = line[:-1]
           route, cost = line.split(",")
@@ -41,19 +43,44 @@ class CallRouter(object):
           trie.insert(route, cost)
       return trie
 
+  def read_number(self, path_to_file):
+    with open('data/' + path_to_file, "r", buffering=200000000) as file:
+        for line in file:
+            line = line[:-1]
+            cost = self.route_costs.search_and_return_cost(line)
+            self.write_cost(line, str(cost))
+
+
+
   # ------------------------------------------------------------------------------
   # CallRouter - Public Methods
   # ------------------------------------------------------------------------------
+  def write_cost(self, phone_number, cost):
+      with open("call-costs-3.tx", "a") as f:
+          f.write(phone_number + ", " + cost + "\n")
+
+# ------------------------------------------------------------------------------
+# Memory Usage Function - Get Memory Function
+# ------------------------------------------------------------------------------
+def get_memory():
+  """Print memory usage to stdout."""
+  usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+  if platform.system() == 'Linux':
+      usage = round(usage/float(1 << 10), 2)
+  else:
+      usage = round(usage/float(1 << 20), 2)
+  print("Current Memory Usage: {} mb.".format(usage))
 
 
 
-def test_call_router():
-  # print('in test router')
-  route_costs_path = 'data/carrier-routes-10.txt'
-  # phone_number_path = 'data/phone-numbers-3.txt'
-  call_router = CallRouter(route_costs_path)
-  return call_router.route_costs.root.children[1].children
-# +34749512, 0.27
-# +1423927, 0.03
 if __name__ == '__main__':
-  print(test_call_router())
+  start = time.time()
+  print("\nInitializing please wait...")
+  route_costs_path = 'route-costs-600.txt'
+  phone_number_path = 'phone-numbers-1000.txt'
+  call_router = CallRouter(route_costs_path)
+  call_router.read_number(phone_number_path)
+  load_time = round(time.time() - start, 4)
+  print("\nThis took: {}.".format(load_time))
+  get_memory()
+  
