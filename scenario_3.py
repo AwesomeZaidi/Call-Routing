@@ -32,7 +32,7 @@ class CallRouter(object):
       # print('in build_tree')
       trie = Trie()
       # iterates through routes and costs
-      with open(file_path, 'r', buffering = 200000) as f:
+      with open(file_path, 'r', buffering=2000000) as f:
         # lines = (l.split(',') for l in f.readlines())
         for line in f:
           line = line[:-1]
@@ -44,80 +44,16 @@ class CallRouter(object):
   # ------------------------------------------------------------------------------
   # CallRouter - Public Methods
   # ------------------------------------------------------------------------------
-  # def read_number(self, path_to_file):
-  #   print('here')
-  #   with open(path_to_file, "r") as file:
-  #     for line in file:
-  #       phone_number = line[:-1]
-  #       print('phone_number:', phone_number)
-  #       cost = self.route_costs.search(phone_number)
-  #       print('cost:', cost)
-  #       # self.write_cost(line, cost)
-  #       return cost
+
 
 
 def test_call_router():
   # print('in test router')
-  route_costs_path = 'data/carrier-routes-35000.txt'
+  route_costs_path = 'data/carrier-routes-10.txt'
   # phone_number_path = 'data/phone-numbers-3.txt'
   call_router = CallRouter(route_costs_path)
-  # call_router.read_number(phone_number_path)
-  # print('call_router:', call_router.route_costs.__repr__())
-  return call_router
-  # numbers = (number for number in
-  #   open('data/phone-numbers-3.txt').readlines())
-  
-  # with open('output/call-costs-3.txt', 'w') as output_file:
-  #   for number in numbers:
-  #       cost = route_costs_trie.search(number)
-  #       output_file.write(f'{number},{cost}\n')
-
+  return call_router.route_costs.root.children[1].children
+# +34749512, 0.27
+# +1423927, 0.03
 if __name__ == '__main__':
   print(test_call_router())
-  
-
-
-
-
-
-
-
-# def buildTrieOfRoutes(self, file):
-#   """
-#     Takes in a file with lines of 'route,costs' and builds a Trie of the routes' digits.
-#   """
-#   for line in open(file):
-#     current = self.root
-#     route, cost = line.split(",")
-#     cost = float(cost.strip("\n"))
-#     for digit in route:
-#       if digit not in current.dictionary:
-#           current.dictionary[digit] = Trie(digit)
-#       current = current.dictionary[digit]
-#     if current.cost:
-#       if current.cost > cost:
-#           current.cost = cost
-#   else:
-#     current.cost = cost
-
-#   def findLowestCostsAndPrintThemToFile(self, file):
-#     """Finds the lowest costs for each phone number in the input file."""
-
-#     for phoneNumber in open(file):
-#       current = self.root
-#       minimum = float('inf')
-#       for digit in phoneNumber:
-#         if digit in current.dictionary:
-#           if current.cost:
-#               minimum = min(minimum, current.cost)
-#           current = current.dictionary[digit]
-#         else:
-#           phoneNumber = phoneNumber.strip("\n")
-#           if minimum != float('inf'):
-#               with open("output_logs/route-costs-3.txt", "a+") as f:
-#                       f.write(phoneNumber + ", " + str(minimum) + '\n')
-#           else:
-#               with open("output_logs/route-costs-3.txt", "a+") as f:
-#                       f.write(phoneNumber + ", 0 \n")
-#           break  # break out of the 'for digit in phoneNumber' loop
-#           # and start on the next phoneNumber.
