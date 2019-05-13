@@ -30,8 +30,7 @@ class Trie:
     def insert(self, route, cost):
         """Inserts the given cost into this trie tree."""
         node = self.root
-        length = len(route)
-        for level in range(length):
+        for level in range(len(route)):
             index = self.get_index(route[level])
             # if current character is not present
             if not node.children[index]:

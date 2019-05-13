@@ -32,40 +32,38 @@ class CallRouter(object):
       # print('in build_tree')
       trie = Trie()
       # iterates through routes and costs
-      with open(file_path, 'r') as f:
+      with open(file_path, 'r', buffering = 200000) as f:
         # lines = (l.split(',') for l in f.readlines())
         for line in f:
-          line = line[1:-1]
+          line = line[:-1]
           route, cost = line.split(",")
-          # print('line:', line)
-          # print('route:', route)
-          # print('cost:', cost)
+
           trie.insert(route, cost)
       return trie
 
   # ------------------------------------------------------------------------------
   # CallRouter - Public Methods
   # ------------------------------------------------------------------------------
-  def read_number(self, path_to_file):
-    print('here')
-    with open(path_to_file, "r") as file:
-      for line in file:
-        phone_number = line[:-1]
-        print('phone_number:', phone_number)
-        cost = self.route_costs.search(phone_number)
-        print('cost:', cost)
-        # self.write_cost(line, cost)
-        return cost
+  # def read_number(self, path_to_file):
+  #   print('here')
+  #   with open(path_to_file, "r") as file:
+  #     for line in file:
+  #       phone_number = line[:-1]
+  #       print('phone_number:', phone_number)
+  #       cost = self.route_costs.search(phone_number)
+  #       print('cost:', cost)
+  #       # self.write_cost(line, cost)
+  #       return cost
 
 
 def test_call_router():
   # print('in test router')
-  route_costs_path = 'data/route-costs-10.txt'
-  phone_number_path = 'data/phone-numbers-3.txt'
+  route_costs_path = 'data/carrier-routes-35000.txt'
+  # phone_number_path = 'data/phone-numbers-3.txt'
   call_router = CallRouter(route_costs_path)
-  call_router.read_number(phone_number_path)
+  # call_router.read_number(phone_number_path)
   # print('call_router:', call_router.route_costs.__repr__())
-  return call_router  
+  return call_router
   # numbers = (number for number in
   #   open('data/phone-numbers-3.txt').readlines())
   
@@ -75,8 +73,8 @@ def test_call_router():
   #       output_file.write(f'{number},{cost}\n')
 
 if __name__ == '__main__':
-  test_call_router()
-  print('done')
+  print(test_call_router())
+  
 
 
 
