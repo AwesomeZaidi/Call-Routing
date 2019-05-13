@@ -21,10 +21,10 @@ class Trie:
         """Inserts the given cost into this trie tree."""
         current_node = self.root
         
-        for i, _ in enumerate(route):
+        for i, d in enumerate(route):
             if route[i] == "+":
                 continue
-            index = self.get_index(route[i])
+            index = self.get_index(d)
             # if current digit is not present
             if not current_node.children[index]:
                 current_node.children[index] = self.get_node()
@@ -36,6 +36,23 @@ class Trie:
         current_node.cost = cost
 
 
+    def search_and_return_cost(self, phone_number):
+        current_node = self.root
+        cost = 0
+        for i, d in enumerate(phone_number):
+            if phone_number[i] == "+":
+                continue
+            index = self.get_index(d)
+
+            if current_node.children[index] != None:
+                current_node = current_node.children[index]
+                if current_node.cost != None:
+                    cost = current_node.cost
+
+        if current_node.cost != None:
+            return current_node.cost
+        else: 
+            return cost
 
 
 
