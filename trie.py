@@ -14,24 +14,35 @@ class Trie:
     def __init__(self):
         """Initialize this trie tree and insert the given items."""
         self.root = TrieNode()
+        self.root.cost = '+'
+        # print('self.root.cost type', type(self.root))
+        # print('self.root.cost', self.root.cost)
         self.size = 0
 
     def __repr__(self):
         "return a string represention of this trie tree"
         return 'size: {}'.format(self.size)
     
-    def insert(self, phone_number: str, cost: int):
-        """Inserts the given item into this trie tree."""
+    def insert(self, route, cost):
+        """Inserts the given cost into this trie tree."""
+        # print('in insert')
+        # print('route:', route)
+        # print('cost:', cost)
+
         node = self.root
 
-        for number in phone_number:
+        for number in route:
+            # print('number:', number)
             number = int(number)
-            print(node)
+            # print(node)
             # if there's no child node, create it where we want it, at the number.
             if node.children[number] is None: 
+                # this_node = node.children.index(number)
                 node.children[number] = TrieNode()
+                self.size += 1
             # otherwise, set the node to that nodes child number.
             node = node.children[number]
+
 
         if node.cost is not None:
             if cost > node.cost:
@@ -50,6 +61,7 @@ class Trie:
                 node = node.children[number]
                 if node.cost is not None:
                     cost = node.cost
+
         # return the cost at node if there is one
         # if not, return the higher cost stored in the tree
         return node.cost if node.cost is not None else cost

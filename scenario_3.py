@@ -14,36 +14,51 @@ import re
 import os
 import glob
 from trie import Trie
-
-def build_trie(file_path: str) -> Trie:
-    """ Returns a Trie tree from the given file_path. Costs of routes."""
-    # get number prefixes and costs from 
-    # lines = numbers_and_costs_from(data_file_path)
-    trie = Trie()
-
-    # iterates through routes and costs
-    with open(file_path, 'r') as f:
-        lines = (l.split(',') for l in f.readlines())
-
-    for route, cost in lines:
-        trie.insert(route[1:], float(cost))
-
-    return trie
+class CallRouter(object):
+  # ------------------------------------------------------------------------------
+  # CallRoutes - Constructor
+  # ------------------------------------------------------------------------------
+  def __init__(self, carrier_route_path):
+      """route_costs: trie tree of costs for routes"""
+      self.route_costs = self.__convert_file_into_trie(carrier_route_path)
+  
+  # ------------------------------------------------------------------------------
+  # CallRouter - Intended Private Methods
+  # ------------------------------------------------------------------------------
+  def __convert_file_into_trie(self, file_path: str) -> Trie:
+      """ Returns a Trie tree from the given file_path. Costs of routes."""
+      # get number prefixes and costs from lines = numbers_and_costs_from(data_file_path)
+      # print('in build_tree')
+      trie = Trie()
+      # iterates through routes and costs
+      with open(file_path, 'r') as f:
+        # lines = (l.split(',') for l in f.readlines())
+        for line in f:
+          line = line[1:-1]
+          route, cost = line.split(",")
+          # print('line:', line)
+          # print('route:', route)
+          # print('cost:', cost)
+          trie.insert(route, cost)
+      return trie
 
 def test_call_router():
-      route_costs_path = 'data/route-costs-10000000.txt'
-      route_costs_trie = build_trie(route_costs_path)
-
-      numbers = (number for number in
-        open('data/phone-numbers-1000.txt').readlines())
-      
-      with open('output/call-costs-3.txt', 'w') as output_file:
-        for number in numbers:
-            cost = route_costs_trie.search(number)
-            output_file.write(f'{number},{cost}\n')
+  # print('in test router')
+  route_costs_path = 'data/route-costs-10.txt'
+  call_router = CallRouter(route_costs_path)
+  # print('call_router:', call_router.route_costs.__repr__())
+  return call_router  
+  # numbers = (number for number in
+  #   open('data/phone-numbers-3.txt').readlines())
+  
+  # with open('output/call-costs-3.txt', 'w') as output_file:
+  #   for number in numbers:
+  #       cost = route_costs_trie.search(number)
+  #       output_file.write(f'{number},{cost}\n')
 
 if __name__ == '__main__':
   test_call_router()
+  print('done')
 
 
 
