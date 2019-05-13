@@ -1,5 +1,4 @@
 #!python
-
 class TrieNode:
     def __init__(self):
         """Initialize this trie tree node with the given data."""
