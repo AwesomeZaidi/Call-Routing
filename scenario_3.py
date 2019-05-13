@@ -60,7 +60,7 @@ class CallRouter(object):
           f.write(phone_number + ", " + cost + "\n")
 
 # ------------------------------------------------------------------------------
-# Memory Usage Function - Get Memory Function
+# Memory Usage Function - Get Memory Function - Edwin Cloud's help
 # ------------------------------------------------------------------------------
 def get_memory():
   """Print memory usage to stdout."""
