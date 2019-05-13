@@ -25,23 +25,23 @@ class Trie:
     def get_node(self):
         return TrieNode()
     
+    def get_index(self, key):
+        return (ord(key) - ord('0'))
+    
     def insert(self, route, cost):
         """Inserts the given cost into this trie tree."""
         node = self.root
-
-        for number in route:
-            # print('number:', number)
-            number = int(number)
-            # print(node)
-            # if there's no child node, create it where we want it, at the number.
-            if node.children[number] is None: 
-                # this_node = node.children.index(number)
-                node.children[number] = self.get_node()
+        length = len(route)
+        for level in range(length):
+            index = self.get_index(route[level])
+            # if current character is not present
+            if not node.children[index]:
+                node.children[index] = self.get_node()
                 self.size += 1
-            # otherwise, set the node to that nodes child number.
-            node = node.children[number]
+            node = node.children[index]
 
-
+        node.leaf = True
+        
         if node.cost is not None:
             if cost > node.cost:
                 return
