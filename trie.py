@@ -28,7 +28,6 @@ class Trie:
         # print('in insert')
         # print('route:', route)
         # print('cost:', cost)
-
         node = self.root
 
         for number in route:
@@ -51,11 +50,13 @@ class Trie:
 
     def search(self, phone_number: str) -> str:
         """Searches for a phone number in trie and returns cost"""
-        """Return the cost of a longest route in this trie search tree matching the given phone number"""
+        print('in trie search')
         node = self.root
+        print('node:', node)
         cost = 0
 
         for number in phone_number:
+            print('number')
             number = int(number)
             if node.children[number] is not None:
                 node = node.children[number]
