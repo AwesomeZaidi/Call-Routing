@@ -25,7 +25,7 @@ class Trie:
             if route[i] == "+":
                 continue
             index = self.get_index(route[i])
-            # if current character is not present
+            # if current digit is not present
             if not current_node.children[index]:
                 current_node.children[index] = self.get_node()
             current_node = current_node.children[index]
