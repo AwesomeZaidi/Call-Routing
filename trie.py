@@ -5,6 +5,7 @@ class TrieNode:
         """Initialize this trie tree node with the given data."""
         self.children = [None] * 10 # 10 because numbers of routes 0-9
         self.cost = None # the value stored at the end of each path (route)
+        self.leaf = False
 
     def __repr__(self):
         """Return a string representation of this trie tree node."""
@@ -13,21 +14,19 @@ class TrieNode:
 class Trie:
     def __init__(self):
         """Initialize this trie tree and insert the given items."""
-        self.root = TrieNode()
-        self.root.cost = '+'
-        # print('self.root.cost type', type(self.root))
-        # print('self.root.cost', self.root.cost)
+        self.root = self.get_node()
+        self.root.cost = "+"
         self.size = 0
 
     def __repr__(self):
         "return a string represention of this trie tree"
         return 'size: {}'.format(self.size)
+
+    def get_node(self):
+        return TrieNode()
     
     def insert(self, route, cost):
         """Inserts the given cost into this trie tree."""
-        # print('in insert')
-        # print('route:', route)
-        # print('cost:', cost)
         node = self.root
 
         for number in route:
@@ -37,7 +36,7 @@ class Trie:
             # if there's no child node, create it where we want it, at the number.
             if node.children[number] is None: 
                 # this_node = node.children.index(number)
-                node.children[number] = TrieNode()
+                node.children[number] = self.get_node()
                 self.size += 1
             # otherwise, set the node to that nodes child number.
             node = node.children[number]
