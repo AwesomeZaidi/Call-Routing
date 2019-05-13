@@ -32,3 +32,24 @@ class Trie:
                 node.children[number] = TrieNode()
             # otherwise, set the node to that nodes child number.
             node = node.children[number]
+
+        if node.cost is not None:
+            if cost > node.cost:
+                return
+        node.cost = cost
+
+    def search(self, phone_number: str) -> str:
+        """Searches for a phone number in trie and returns cost"""
+        """Return the cost of a longest route in this trie search tree matching the given phone number"""
+        node = self.root
+        cost = 0
+
+        for number in phone_number:
+            number = int(number)
+            if node.children[number] is not None:
+                node = node.children[number]
+                if node.cost is not None:
+                    cost = node.cost
+        # return the cost at node if there is one
+        # if not, return the higher cost stored in the tree
+        return node.cost if node.cost is not None else cost
