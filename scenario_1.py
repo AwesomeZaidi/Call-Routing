@@ -10,25 +10,16 @@
 # Copyright © 2019 Jayce Azua and Asim Zaidi. All rights reserved.
 # ==================================================================================
 
-# By hand:
-# Step 0: Copy full phone number.
-# Step 1: Open routes file.
-# Step 2: Search for phone number using CMD+F (or CTRL+F on windows).
-#         If there are no search results, hit backspace in search bar.
-# Step 3: Repeat Step 2 til you find a match.
-#         In the unlikely event you get several matches, choose the cheapest.
-# If you found a match in Step 3, the cost is the number on the right side of the comma.
-# Otherwise, we don't have a matching route, tell your manager sorry.
-
-# By code:
+# Code Solution:
 
 import sys
 import re
+import time
+import resource
+import platform
 
 def read_file(file_name):
-	"""
-		Opens the file and splits the numbers into a list.
-	"""
+	"""Opens the file and splits the numbers into a list."""
 	with open('data/' + file_name, "r") as file:
 		number_data = file.read()
 		number_data = re.split(',|\n', number_data)
@@ -37,8 +28,8 @@ def read_file(file_name):
 def find_route_cost(number_data, phone_number):
 	"""
 		number_data: list of number, cost, number, cost, etc.
-		Finds the longest route match and returns the associated cost.
-		Runtime: O(n)- O(p*n)
+		Finds the longest route match for the given phone number and returns the cost.
+		Runtime: O(n) -> O(p*n)
 		p = len of phone_number
 		n = len of number_data list
 	"""
@@ -55,9 +46,33 @@ def write_cost(phone_number, cost):
 	f = open("route-costs-1.txt", "w")
 	f.write(phone_number + ", " + number_route_cost)
 
+
+# ------------------------------------------------------------------------------
+# Memory Usage Function (Inspired by https://github.com/edwintcloud)
+# ------------------------------------------------------------------------------
+def get_memory(): 
+    """Print memory usage to stdout."""
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    if platform.system() == 'Linux':
+        usage = round(usage/float(1 << 10), 2)
+    else:
+        usage = round(usage/float(1 << 20), 2)
+    print("Current Memory Usage: {} mb.".format(usage))
+
 if __name__ == "__main__":
-	#  scenario playing like how Edwin had it.
-	paths = read_file("call-costs-1.tx")  # phone-numbers
+	paths = read_file("route-costs-100.txt")
 	phone_number = '+14152348111'
 	number_route_cost = find_route_cost(paths, phone_number)
 	write_cost(phone_number, number_route_cost)
+	get_memory()
+
+
+# Manual Solution:
+# Step 0: Copy full phone number.
+# Step 1: Open routes file.
+# Step 2: Search for phone number using CMD+F (or CTRL+F on windows).
+#         If there are no search results, hit backspace in search bar.
+# Step 3: Repeat Step 2 til you find a match.
+#         In the unlikely event you get several matches, choose the cheapest.
+# If you found a match in Step 3, the cost is the number on the right side of the comma.
+# Otherwise, we don't have a matching route, tell your manager sorry.
