@@ -47,7 +47,7 @@ def find_route_cost(number_data, phone_number):
 	return str(0) # if number not found
 
 def write_cost(phone_number, cost):
-	f = open('data/' + "route-costs-1.txt", "w")
+	f = open('data/' + "call-costs-1.txt", "w")
 	f.write(phone_number + ", " + number_route_cost)
 
 
