@@ -10,13 +10,17 @@
 # Copyright © 2019 Jayce Azua and Asim Zaidi. All rights reserved.
 # ==================================================================================
 
-import random # generate random numbers
-import re # regular expressions
-import sys # command line args
+# scenario 1 - 3
+import os
+import re
+import sys
 import time
+import mmap
+import random
 import resource
 import platform
-from hashtable import HashTable 
+# scenario 2
+from hashtable import HashTable
 
 class CallRouter(object):
     

@@ -10,12 +10,18 @@
 # Copyright © 2019 Jayce Azua and Asim Zaidi. All rights reserved.
 # ==================================================================================
 
-import re
+# scenario 1 - 3
 import os
-import resource
-import platform
+import re
+import sys
 import time
 import mmap
+import random
+import resource
+import platform
+# scenario 2
+from hashtable import HashTable
+# scenario 3
 from trie import Trie
 class CallRouter(object):
   

@@ -12,9 +12,13 @@
 
 # Code Solution:
 
-import sys
+# scenario 1 - 3
+import os
 import re
+import sys
 import time
+import mmap
+import random
 import resource
 import platform
 
