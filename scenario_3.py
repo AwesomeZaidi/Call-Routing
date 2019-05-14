@@ -29,7 +29,7 @@ class CallRouter(object):
   # ------------------------------------------------------------------------------
   # CallRouter - Intended Private Methods
   # ------------------------------------------------------------------------------
-  def __convert_file_into_trie(self, file_path: str) -> Trie:
+  def __convert_file_into_trie(self, file_path: str):
       """ Returns a Trie tree from the given file_path. Costs of routes."""
       # get number prefixes and costs from lines = numbers_and_costs_from(data_file_path)
       # print('in build_tree')
@@ -76,11 +76,12 @@ def get_memory():
 if __name__ == '__main__':
   start = time.time()
   print("\nInitializing please wait...")
-  route_costs_path = 'route-costs-600.txt'
-  phone_number_path = 'phone-numbers-1000.txt'
+  route_costs_path = 'route-costs-10000000.txt'
+  phone_number_path = 'phone-numbers-10000.txt'
   call_router = CallRouter(route_costs_path)
   call_router.read_number(phone_number_path)
   load_time = round(time.time() - start, 4)
   print("\nThis took: {}.".format(load_time))
   get_memory()
   
+# maybe implement for memoization

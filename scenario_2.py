@@ -78,7 +78,7 @@ class CallRouter(object):
 
 def test_call_router():
     # phone_numbers_path = 'data/phone-numbers-1000.txt'
-    carrier_route_path = 'route-costs-106000.txt'
+    carrier_route_path = 'route-costs-10000000.txt'
     call_router = CallRouter(carrier_route_path)
     call_router.read_number('phone-numbers-10000.txt')
     return call_router.route_costs.values()
