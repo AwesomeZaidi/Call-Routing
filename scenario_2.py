@@ -13,6 +13,9 @@
 import random # generate random numbers
 import re # regular expressions
 import sys # command line args
+import time
+import resource
+import platform
 from hashtable import HashTable 
 
 class CallRouter(object):
@@ -57,7 +60,6 @@ class CallRouter(object):
     # CallRouter - Public Methods
     # ------------------------------------------------------------------------------
     def find_route_cost(self, phone_number):
-        print("phone:", phone_number)
         for _ in phone_number:
 
             if self.route_costs.contains(phone_number):
@@ -81,5 +83,18 @@ def test_call_router():
     call_router.read_number('phone-numbers-10000.txt')
     return call_router.route_costs.values()
 
+# ------------------------------------------------------------------------------
+# Memory Usage Function (Inspired by https://github.com/edwintcloud)
+# ------------------------------------------------------------------------------
+def get_memory(): 
+    """Print memory usage to stdout."""
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    if platform.system() == 'Linux':
+        usage = round(usage/float(1 << 10), 2)
+    else:
+        usage = round(usage/float(1 << 20), 2)
+    print("Current Memory Usage: {} mb.".format(usage))
+
 if __name__ == '__main__':
-    print(test_call_router())
+    test_call_router()
+    get_memory()
