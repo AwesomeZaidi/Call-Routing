@@ -43,7 +43,7 @@ def find_route_cost(number_data, phone_number):
 	return str(0) # if number not found
 
 def write_cost(phone_number, cost):
-	f = open("route-costs-1.txt", "w")
+	f = open('data/' + "route-costs-1.txt", "w")
 	f.write(phone_number + ", " + number_route_cost)
 
 
@@ -60,10 +60,14 @@ def get_memory():
     print("Current Memory Usage: {} mb.".format(usage))
 
 if __name__ == "__main__":
-	paths = read_file("route-costs-100.txt")
+	start = time.time()
+	print("\nInitializing please wait...")
+	paths = read_file("route-costs-10.txt")
 	phone_number = '+14152348111'
 	number_route_cost = find_route_cost(paths, phone_number)
 	write_cost(phone_number, number_route_cost)
+	load_time = round(time.time() - start, 4)
+	print("\nThis took: {}.".format(load_time))
 	get_memory()
 
 

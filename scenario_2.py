@@ -73,7 +73,7 @@ class CallRouter(object):
         
 
     def write_cost(self, phone_number, cost):
-        with open("call-costs-2.tx", "a") as f:
+        with open('data/' + "call-costs-2.txt", "a") as f:
             f.write(phone_number + ", " + cost + "\n")
 
 def test_call_router():
@@ -96,5 +96,9 @@ def get_memory():
     print("Current Memory Usage: {} mb.".format(usage))
 
 if __name__ == '__main__':
+    start = time.time()
+    print("\nInitializing please wait...")
     test_call_router()
+    load_time = round(time.time() - start, 4)
+    print("\nThis took: {}.".format(load_time))
     get_memory()
