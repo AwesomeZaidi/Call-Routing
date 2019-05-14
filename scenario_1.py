@@ -66,7 +66,7 @@ def get_memory():
 if __name__ == "__main__":
 	start = time.time()
 	print("\nInitializing please wait...")
-	paths = read_file("route-costs-10.txt")
+	paths = read_file("route-costs-106000.txt")
 	phone_number = '+14152348111'
 	number_route_cost = find_route_cost(paths, phone_number)
 	write_cost(phone_number, number_route_cost)

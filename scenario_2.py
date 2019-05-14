@@ -71,8 +71,8 @@ class Hash_CallRouter(object):
             f.write(phone_number + ", " + cost + "\n")
 
 def test_call_router():
-    carrier_route_path = 'route-costs-10000000.txt'
-    phone_number_path = 'phone-numbers-10000.txt'
+    carrier_route_path = 'route-costs-106000.txt'
+    phone_number_path = 'phone-numbers-1000.txt'
     call_router = Hash_CallRouter(carrier_route_path)
     call_router.read_number(phone_number_path)
     return call_router
