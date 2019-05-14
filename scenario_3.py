@@ -60,16 +60,16 @@ class CallRouter(object):
           f.write(phone_number + ", " + cost + "\n")
 
 # ------------------------------------------------------------------------------
-# Memory Usage Function - Get Memory Function - Edwin Cloud's help
+# Memory Usage Function (Inspired by https://github.com/edwintcloud)
 # ------------------------------------------------------------------------------
-def get_memory():
-  """Print memory usage to stdout."""
-  usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-  if platform.system() == 'Linux':
-      usage = round(usage/float(1 << 10), 2)
-  else:
-      usage = round(usage/float(1 << 20), 2)
-  print("Current Memory Usage: {} mb.".format(usage))
+def get_memory(): 
+    """Print memory usage to stdout."""
+    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    if platform.system() == 'Linux':
+        usage = round(usage/float(1 << 10), 2)
+    else:
+        usage = round(usage/float(1 << 20), 2)
+    print("Current Memory Usage: {} mb.".format(usage))
 
 
 
