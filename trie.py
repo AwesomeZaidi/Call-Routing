@@ -12,7 +12,7 @@ class Trie:
         
     def get_node(self):
         return TrieNode()
-    
+        
     def get_index(self, key):
         return (ord(key) - ord('0'))
     
