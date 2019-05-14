@@ -82,6 +82,5 @@ if __name__ == "__main__":
 # - If there are no search results, hit `backspace` in search bar.
 # 3. Repeat `Step 2` til you find a match.
 # - In the unlikely event you get several matches, choose the cheapest.
-
 # If you found a match in Step 3, the cost is the number on the right side of the comma.
 
