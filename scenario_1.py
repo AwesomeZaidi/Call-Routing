@@ -75,12 +75,13 @@ if __name__ == "__main__":
 	get_memory()
 
 
-# Manual Solution:
-# Step 0: Copy full phone number.
-# Step 1: Open routes file.
-# Step 2: Search for phone number using CMD+F (or CTRL+F on windows).
-#         If there are no search results, hit backspace in search bar.
-# Step 3: Repeat Step 2 til you find a match.
-#         In the unlikely event you get several matches, choose the cheapest.
+# Our the manual solution inspired by Nicoli Safai
+# 0. Copy full phone number.
+# 1. Open routes file.
+# 2. Search for phone number using `CMD+F` (or `CTRL+F` on windows).
+# - If there are no search results, hit `backspace` in search bar.
+# 3. Repeat `Step 2` til you find a match.
+# - In the unlikely event you get several matches, choose the cheapest.
+
 # If you found a match in Step 3, the cost is the number on the right side of the comma.
-# Otherwise, we don't have a matching route, tell your manager sorry.
+
