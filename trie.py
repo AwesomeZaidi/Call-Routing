@@ -52,10 +52,11 @@ class Trie:
 
 
 if __name__ == "__main__":
+    pass
     # use this as test
-    route = "+415890"
-    cost = "0.045"
-    test_trie = Trie()
-    test_trie.insert(route, cost)
-    print(test_trie.search_and_return_cost("+4158901111"))
+    # route = "+415890"
+    # cost = "0.045"
+    # test_trie = Trie()
+    # test_trie.insert(route, cost)
+    # print(test_trie.search_and_return_cost("+4158901111"))
     # print(bool(test_trie.root.children["+"].children["4"].children["1"].children["5"].children["8"].children["9"].children["0"].children))
