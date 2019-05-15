@@ -40,9 +40,4 @@ class Trie_Test(unittest.TestCase):
     cost = "0.045"
     trie_tree.insert(route, cost)
     assert len(trie_tree.root.children) == 1
-    current_node = trie_tree.root
-    for d in route:
-      if d in current_node.children:
-        current_node = current_node.children[d]
-        if current_node.cost != None:
-          assert current_node.cost == cost
+    assert trie_tree.search_and_return_cost(route) == cost
