@@ -77,16 +77,10 @@ def test_call_router():
     call_router.read_number(phone_number_path)
     return call_router
 # ------------------------------------------------------------------------------
-# Memory Usage Function (Inspired by https://github.com/edwintcloud)
+# Memory Usage Function (Inspired by research)
 # ------------------------------------------------------------------------------
 def get_memory(): 
-    """Print memory usage to stdout."""
-    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    if platform.system() == 'Linux':
-        usage = round(usage/float(1 << 10), 2)
-    else:
-        usage = round(usage/float(1 << 20), 2)
-    print("Current Memory Usage: {} mb.".format(usage))
+    pass
 
 
 if __name__ == '__main__':

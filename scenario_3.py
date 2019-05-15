@@ -11,11 +11,13 @@
 # ==================================================================================
 
 # scenario 1 - 3
+
 import os
 import re
 import sys
 import time
 import mmap
+import psutil
 import random
 import resource
 import platform
@@ -66,29 +68,29 @@ class Trie_CallRouter(object):
 
 def test_call_router():
     carrier_route_path = 'route-costs-10000000.txt'
-    phone_number_path = 'phone-numbers-10000.txt'
+    # phone_number_path = 'phone-numbers-10000.txt'
     call_router = Trie_CallRouter(carrier_route_path)
-    call_router.read_number(phone_number_path)
-    return call_router
+    # call_router.read_number(phone_number_path)
+    return call_router.route_costs.root
 
 
 # ------------------------------------------------------------------------------
-# Memory Usage Function (Inspired by https://github.com/edwintcloud)
+# Memory Usage Function (Inspired by research)
 # ------------------------------------------------------------------------------
 def get_memory():
     """Print memory usage to stdout."""
-    usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    if platform.system() == 'Linux':
-        usage = round(usage/float(1 << 10), 2)
-    else:
-        usage = round(usage/float(1 << 20), 2)
-    print("Current Memory Usage: {} mb.".format(usage))
-
+    process = psutil.Process(os.getpid())
+    print(process.memory_info().rss) # in bytes
 
 if __name__ == '__main__':
     start = time.time()
     print("\nInitializing Scenario 3 wait...")
-    test_call_router()
+    print(test_call_router())
     load_time = round(time.time() - start, 4)
     print("\nThis took: {}.".format(load_time))
     get_memory()
+
+
+
+
+
