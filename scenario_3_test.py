@@ -1,5 +1,6 @@
 import unittest
-from scenario_3 import Trie_CallRouter
+from trie import Trie
+
 
 
 class Trie_CallRouting(unittest.TestCase):

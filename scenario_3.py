@@ -13,14 +13,8 @@
 # scenario 1 - 3
 
 import os
-import re
-import sys
 import time
-import mmap
 import psutil
-import random
-import resource
-import platform
 # scenario 3
 from trie import Trie
 
@@ -42,7 +36,7 @@ class Trie_CallRouter(object):
         # print('in build_tree')
         trie_lookup = Trie()
         # iterates through routes and costs
-        with open('data/' + file_path, 'r', buffering=2000000000) as file:
+        with open('data/' + file_path, 'r') as file:
             for line in file:
                 line = line[:-1]
                 route, cost = line.split(",")
@@ -50,7 +44,7 @@ class Trie_CallRouter(object):
         return trie_lookup
 
     def read_number(self, path_to_file):
-        with open('data/' + path_to_file, "r", buffering=200000000) as file:
+        with open('data/' + path_to_file, "r") as file:
             for line in file:
                 line = line[:-1]
                 cost = self.find_route_cost(line)
@@ -67,12 +61,16 @@ class Trie_CallRouter(object):
 
 
 def test_call_router():
+    start = time.time()
     carrier_route_path = 'route-costs-10000000.txt'
-    # phone_number_path = 'phone-numbers-10000.txt'
     call_router = Trie_CallRouter(carrier_route_path)
-    # call_router.read_number(phone_number_path)
-    return call_router.route_costs.root
-
+    load_time = round(time.time() - start, 4)
+    print("\nBuilding the Trie took: {} seconds.".format(load_time))
+    phone_number = 'phone-numbers-10000.txt'
+    start = time.time()
+    call_router.read_number(phone_number)
+    load_time = round(time.time() - start, 4)
+    print("\nLooking up 10000 numbers in a Trie took: {} seconds.".format(load_time))
 
 # ------------------------------------------------------------------------------
 # Memory Usage Function (Inspired by research)
@@ -83,12 +81,8 @@ def get_memory():
     print(process.memory_info().rss) # in bytes
 
 if __name__ == '__main__':
-    start = time.time()
-    print("\nInitializing Scenario 3 wait...")
-    print(test_call_router())
-    load_time = round(time.time() - start, 4)
-    print("\nThis took: {}.".format(load_time))
-    get_memory()
+    print("\nInitializing Scenario 3...")
+    test_call_router()
 
 
 
