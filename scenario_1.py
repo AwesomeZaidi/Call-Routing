@@ -10,9 +10,6 @@
 # Copyright © 2019 Jayce Azua and Asim Zaidi. All rights reserved.
 # ==================================================================================
 
-# Code Solution:
-
-# scenario 1 - 3
 import os
 import re
 import sys
