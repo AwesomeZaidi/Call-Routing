@@ -36,6 +36,13 @@ class Trie:
         current_node.cost = cost
 
     def search_and_return_cost(self, phone_number):
+        """
+            Iterates through number and then nodes to find the lowest matching route cost.
+            Args:       phone_number    (string)
+            Returns:    cost            (string)
+            Runtime: O(log(n))
+            n = nodes in trie tree
+        """
         current_node = self.root
         cost = 0
         for d in phone_number:
