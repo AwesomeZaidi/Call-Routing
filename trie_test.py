@@ -37,7 +37,9 @@ class Trie_Test(unittest.TestCase):
   def test_search_and_return_cost(self):
     trie_tree = Trie()
     route = "+415890"
+    route_2 = "+415"
     cost = "0.045"
     trie_tree.insert(route, cost)
     assert len(trie_tree.root.children) == 1
     assert trie_tree.search_and_return_cost(route) == cost
+    assert trie_tree.search_and_return_cost(route_2) == None
